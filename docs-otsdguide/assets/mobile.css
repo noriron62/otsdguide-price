@@ -1,0 +1,365 @@
+@charset "UTF-8";
+
+/*--------------------------------------------------------
+モバイル用レイアウト（640px以下の解像度のスクリーン含む）
+--------------------------------------------------------*/
+
+@media
+only screen and (max-width : 640px){
+
+
+/*--------------------------------------------------------
+サイト全体の共通設定
+-------------------------------------------------------*/
+
+html{
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+html,body{
+	width: 100%;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+}
+
+textarea,input{ max-width: 95%; }
+
+input[type="submit"],input[type="image"],
+input[type="reset"],input[type="button"],
+input[type="file"]{ max-width: none; }
+
+
+/*●画像サイズの調整*/
+img {
+	height: auto;
+	max-width: 100%;
+}
+
+a{
+	color: #39f;
+	-webkit-tap-highlight-color: #9cc;
+}
+
+
+/*--------------------------------------------------------
+エリアの設定
+--------------------------------------------------------*/
+
+#container{
+	padding-top: 0;
+	padding-bottom: 3em;
+}
+
+
+/*--------------------------------------------------------
+トップ
+--------------------------------------------------------*/
+
+#top{ 
+	position: relative;
+	top: 0;
+	height: auto;
+	font-size: 1.2em;
+}
+
+#top-menu{
+	float: none;
+}
+
+#top-menu li{
+	text-align: left;
+	display: block;
+}
+
+
+/*--------------------------------------------------------
+ヘッダー
+--------------------------------------------------------*/
+
+/*●ヘッダの回り込み解除*/
+#header #header-title,
+#header-in #header-text{
+	float: none;
+	width: 100%;
+}
+
+#header .header-logo{ font-size: 2em; }
+
+
+/*--------------------------------------------------------
+グローバルナビ
+--------------------------------------------------------*/
+
+#global-nav{
+	background-color: transparent;
+	border-top: 0;
+	border-bottom: 0;
+}
+
+#global-nav dt{
+	padding-left: 2.5em!important;
+	background: url(./images/icon/icon-arrow05.png) 1em center no-repeat #ff9899;
+	color: #fff;
+	font-size: 1.4em;
+}
+
+#global-nav #global-nav-in .menu-wrap{ display:none; }
+
+#global-nav #global-nav-in #menu{ margin-bottom: 0; }
+
+#global-nav #global-nav-in #menu,
+#global-nav #global-nav-in #menu li{
+	width: 100%;
+	border: 0;
+}
+
+#global-nav #menu li.first{ border-left: 0; }
+
+#global-nav #global-nav-in #menu li{
+	border-bottom: 1px solid #fff;
+	background-color: #fff;
+	white-space: normal;
+}
+
+#global-nav #global-nav-in #menu li.first{ border-left: 0; }
+
+#global-nav #global-nav-in #menu ul{
+	position: static;
+	width: auto;
+	padding-left: 10%;
+}
+
+#global-nav #global-nav-in #menu ul li{ width: 100%; }
+
+#global-nav #global-nav-in #menu ul li:last-child{ border-bottom: 0; }
+
+/*メニューのデザイン*/
+#global-nav #global-nav-in #menu li a:link,
+#global-nav #global-nav-in #menu li a:visited,
+#global-nav #global-nav-in #menu li a:hover,
+#global-nav #global-nav-in #menu li a:active{ background: url(./images/icon/icon-arrow04.png) 1em 1em no-repeat #eeebd8; }
+
+#global-nav #global-nav-in #menu ul li a{ width: auto; }
+
+#global-nav .btn-gnav{
+	display:block;
+	padding: 0.5em;
+	cursor: pointer;
+}
+
+
+/*--------------------------------------------------------
+コンテンツ全体
+--------------------------------------------------------*/
+
+#main-image .catch-copy{ font-size: 1.4em; }
+
+
+/*--------------------------------------------------------
+メインコンテンツ（本文）
+--------------------------------------------------------*/
+
+/*●最新情報の回り込みを解除*/
+#main-contents dl.news dt,
+#main-contents dl.news dd.cat,
+#main-contents dl.dl-style01 dt{ float: none; }
+
+#main-contents dl.news dt{ margin-bottom: 0.4em; }
+
+#main-contents dl.news dt,
+#main-contents dl.dl-style01 dt{
+	padding-right: 1em;
+	padding-left: 1em;
+}
+
+#main-contents dl.news dd.cat{
+	display: inline-block;
+	width: auto;
+	margin: 0 1em 0.5em;
+	padding: 0.3em 1em;
+}
+
+#main-contents dl.news dd,
+#main-contents dl.dl-style01 dd{ 
+	margin: 0 0 10px 0;
+	padding: 0 1em 0.8em 1em;
+}
+
+/*●Tableをブロック表示に*/
+#main-contents .table-style01,
+#main-contents .table-style01 thead,
+#main-contents .table-style01 tbody,
+#main-contents .table-style01 tfoot,
+#main-contents .table-style01 tr,
+#main-contents .table-style01 th,
+#main-contents .table-style01 td{ display: block; }
+
+#main-contents .table-style01 th,
+#main-contents .table-style01 td{
+	float: left;
+	width: 100%!important;
+	box-sizing: border-box;
+	-moz-box-sizing: padding-box;
+}
+
+#main-contents .table-style01{ /zoom : 1; }
+#main-contents .table-style01:after{ content : ''; display : block; clear : both; height:0; }
+
+.box-wrap .box-l,
+.box-wrap .box-r{
+	float: none;
+	width: 100%;
+}
+
+
+/*Youtube動画*/
+#main-contents .v-wrap{
+	position: relative;
+	overflow: hidden;
+	height: 0;
+	padding-bottom: 56.25%;
+	padding-top: 30px;
+}
+
+#main-contents .v-wrap iframe,
+#main-contents .v-wrap object,
+#main-contents .v-wrap embed{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+
+/*--------------------------------------------------------
+サブコンテンツ / サイドバー
+--------------------------------------------------------*/
+
+/*折り畳み*/
+#sub-contents .sub-contents-btn,
+#sidebar .sidebar-btn{
+	display: block;
+	margin-bottom: 1em;
+	padding: 0.5em;
+	padding-left: 2.5em!important;
+	background: url(./images/icon/icon-arrow05.png) 1em center no-repeat #ff9899;
+	color: #fff;
+	font-size: 1.167em;
+	cursor: pointer;
+}
+
+.sub-column #sub-contents-in,
+.sub-column #sidebar-in{ display: none; }
+
+.sub-column .showSubConts,
+.sub-column .showSidebar{
+	display: block!important;
+}
+
+.col1 .sub-column .ranking .item-img,
+.col2 #sub-contents .ranking .item-img,
+.col2r #sub-contents .ranking .item-img,
+.col1 .sub-column .profile-img,
+.col2 #sub-contents .profile-img,
+.col2r #sub-contents .profile-img{
+	float: none;
+	padding-right: 0;
+}
+
+.col1 .sub-column .banner li,
+.col2 #sub-contents .banner li,
+.col2r #sub-contents .banner li{
+	display: block;
+	margin-right: 0;
+}
+
+.sub-column dl.search-box{ width: 100%; }
+
+.sub-column dl.search-box dt{
+	margin-right: 0;
+	margin-bottom: 0.4em;;
+	width: 100%;
+}
+
+.sub-column dl.search-box dt,
+.sub-column dl.search-box dd{ float: none; }
+
+
+/*--------------------------------------------------------
+フッター
+--------------------------------------------------------*/
+
+#footer .footer-menu ul{
+	float: none;
+	width: 100%;
+}
+
+#footer .area01,
+#footer .area02{
+	float: none;
+	width: 100%;
+	margin-bottom: 2em;
+}
+
+.copyright{ padding-bottom: 40px; }
+
+.copyright span{ display: block; }
+
+
+/*------------------------------------------------------------
+WordPress用
+-------------------------------------------------------------*/
+
+#main-contents .sb{
+	text-align: left;
+}
+
+img.alignleft,
+img.alignright{
+	float: none;
+	display: block;
+	padding: 0;
+	margin: auto;
+}
+
+
+/*--------------------------------------------------------
+ページトップ
+--------------------------------------------------------*/
+
+.page-top{
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	text-align: center;
+}
+
+.page-top a{
+	display: block;
+	border: 0;
+	border-top: 1px solid #fff;
+	border-radius: 0;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+}
+
+.page-top a:link,
+.page-top a:visited,
+.page-top a:hover,
+.page-top a:active{
+	background: url(./images/common/bg-pagetop.png) 20px center no-repeat #c8c8c8;
+	color: #fff;
+}
+
+.page-top:not(\*|*){ position: static; }/* Opera9以下 */
+
+}
+
+@media not screen and (1) { .page-top { position: static; } }/* Opera10以上 */
+
+
+/*------------------------------------------------------------
+　template created by web-rider
+-------------------------------------------------------------*/

@@ -1,0 +1,34 @@
+@charset "UTF-8";
+td input{ width; auto; }
+
+.form-table tr td label{ margin-right: 1em; }
+
+.wp-list-table .thumbnail img{
+	width: 50%;
+	height: 50%;
+}
+
+.inside table{ max-width: 100%; }
+
+.toplevel_page_keni_admin_menu h3{
+	margin-top: 3em;
+	font-weight: bold;
+}
+
+.keni_h1_textbox,
+.keni_canonical_textbox,
+.keni_ogp_title input,
+.keni_ogp_description input{ width: 98%; }
+
+.keni_relation_lists input[type=text]{ max-width: 90%; }
+
+.keni_note{ color: #a00; }
+
+#keni_noreg_msg{
+	margin: 1em 1em 1em 0;
+	padding: 1em;
+	border: 3px solid #db1b1b;
+	font-weight: bold;
+}
+
+#keni_noreg_msg p{ margin: 0; }

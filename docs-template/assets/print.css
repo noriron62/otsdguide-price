@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+/*--------------------------------------------------------
+印刷用CSS
+-------------------------------------------------------*/
+
+#container{ padding-top: 0; }
+
+#top,
+#global-nav,
+#breadcrumbs,
+.sub-column,
+.page-top,
+#footer,
+#footer-banner,
+.sb{ display: none!important; }
+
+#main{ overflow: visible!important; }
+
+#main-and-sub{ width: 100%!important; }
+
+#main-contents{
+	margin: 0 auto!important;
+	width: 96%!important;
+	overflow: visible!important;
+}

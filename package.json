@@ -1,0 +1,17 @@
+{
+  "name": "otsdguide-price",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "otsdguide.org(プロクリアワンデー通販激安最安値情報)の価格自動更新・静的サイト生成",
+  "scripts": {
+    "build": "node scripts/build-otsdguide.mjs",
+    "deploy": "node scripts/deploy-ftp.mjs"
+  },
+  "dependencies": {
+    "basic-ftp": "^5.0.5"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

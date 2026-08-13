@@ -1,0 +1,690 @@
+@charset "UTF-8";
+
+/*------------------------------------------------------------
+t：上（top）、r：右（right）、b：下（bottom）、l：左（left）
+c：左右の中央（center）、m：上下の中間（middle）
+-------------------------------------------------------------*/
+
+/*------------------------------------------------------------
+1、align・・・文字の横位置
+-------------------------------------------------------------*/
+
+.al-c{ text-align: center; }/*中央寄せ*/
+.al-r{ text-align: right; }/*右寄せ*/
+.al-l{ text-align: left; }/*左寄せ*/
+
+
+/*------------------------------------------------------------
+2、valign・・・文字の縦位置
+-------------------------------------------------------------*/
+
+.vl-t{ vertical-align: top!important; }/*上寄せ*/
+.vl-m{ vertical-align: middle!important; }/*中央寄せ*/
+.vl-b{ vertical-align: bottom!important; }/*下寄せ*/
+
+
+/*------------------------------------------------------------
+3、float・・・左右の回り込み
+-------------------------------------------------------------*/
+
+.fl-r{ float: right; }/*右に回り込み*/
+.fl-l{ float: left; }/*左に回り込み*/
+.fl-c{ clear: both; }
+
+
+/*640px以下では回り込み解除*/
+@media
+only screen and (max-width : 640px){
+.fl-r,
+.fl-l{ float: none; }
+}
+
+
+/*------------------------------------------------------------
+4、margin・・・周りのブロックからの距離
+-------------------------------------------------------------*/
+
+.m0{ margin: 0!important; }/*周りからのmarginを0に*/
+.m0-t{ margin-top: 0!important; }/*上からのmarginを0に*/
+.m0-r{ margin-right: 0!important; }/*右からのmarginを0に*/
+.m0-b{ margin-bottom: 0!important; }/*下からのmarginを0に*/
+.m0-l{ margin-left: 0!important; }/*左からのmarginを0に*/
+
+.m5{ margin: 5px!important; }
+.m5-t{ margin-top: 5px!important; }
+.m5-r{ margin-right: 5px!important; }
+.m5-b{ margin-bottom: 5px!important; }
+.m5-l{ margin-left: 5px!important; }
+
+.m10{ margin: 10px!important; }
+.m10-t{ margin-top: 10px!important; }
+.m10-r{ margin-right: 10px!important; }
+.m10-b{ margin-bottom: 10px!important; }
+.m10-l{ margin-left: 10px!important; }
+
+.m15{ margin: 15px!important; }
+.m15-t{ margin-top: 15px!important; }
+.m15-r{ margin-right: 15px!important; }
+.m15-b{ margin-bottom: 15px!important; }
+.m15-l{ margin-left: 15px!important; }
+
+.m20{ margin: 20px!important; }
+.m20-t{ margin-top: 20px!important; }
+.m20-r{ margin-right: 20px!important; }
+.m20-b{ margin-bottom: 20px!important; }
+.m20-l{ margin-left: 20px!important; }
+
+.m25{ margin: 25px!important; }
+.m25-t{ margin-top: 25px!important; }
+.m25-r{ margin-right: 25px!important; }
+.m25-b{ margin-bottom: 25px!important; }
+.m25-l{ margin-left: 25px!important; }
+
+.m30{ margin: 30px!important; }
+.m30-t{ margin-top: 30px!important; }
+.m30-r{ margin-right: 30px!important; }
+.m30-b{ margin-bottom: 30px!important; }
+.m30-l{ margin-left: 30px!important; }
+
+.m40{ margin: 40px!important; }
+.m40-t{ margin-top: 40px!important; }
+.m40-r{ margin-right: 40px!important; }
+.m40-b{ margin-bottom: 40px!important; }
+.m40-l{ margin-left: 40px!important; }
+
+.m50{ margin: 50px!important; }
+.m50-t{ margin-top: 50px!important; }
+.m50-r{ margin-right: 50px!important; }
+.m50-b{ margin-bottom: 50px!important; }
+.m50-l{ margin-left: 50px!important; }
+
+.m60{ margin: 60px!important; }
+.m60-t{ margin-top: 60px!important; }
+.m60-r{ margin-right: 60px!important; }
+.m60-b{ margin-bottom: 60px!important; }
+.m60-l{ margin-left: 60px!important; }
+
+.m70{ margin: 70px!important; }
+.m70-t{ margin-top: 70px!important; }
+.m70-r{ margin-right: 70px!important; }
+.m70-b{ margin-bottom: 70px!important; }
+.m70-l{ margin-left: 70px!important; }
+
+.m80{ margin: 80px!important; }
+.m80-t{ margin-top: 80px!important; }
+.m80-r{ margin-right: 80px!important; }
+.m80-b{ margin-bottom: 80px!important; }
+.m80-l{ margin-left: 80px!important; }
+
+.m90{ margin: 90px!important; }
+.m90-t{ margin-top: 90px!important; }
+.m90-r{ margin-right: 90px!important; }
+.m90-b{ margin-bottom: 90px!important; }
+.m90-l{ margin-left: 90px!important; }
+
+.m100{ margin: 100px!important; }
+.m100-t{ margin-top: 100px!important; }
+.m100-r{ margin-right: 100px!important; }
+.m100-b{ margin-bottom: 100px!important; }
+.m100-l{ margin-left: 100px!important; }
+
+
+/*------------------------------------------------------------
+5、padding・・・周りのブロックからの距離（padding）
+-------------------------------------------------------------*/
+
+.p0{ padding: 0!important; }
+.p0-t{ padding-top: 0!important; }
+.p0-r{ padding-right: 0!important; }
+.p0-b{ padding-bottom: 0!important; }
+.p0-l{ padding-left: 0!important; }
+
+.p5{ padding: 5px!important; }
+.p5-t{ padding-top: 5px!important; }
+.p5-r{ padding-right: 5px!important; }
+.p5-b{ padding-bottom: 5px!important; }
+.p5-l{ padding-left: 5px!important; }
+
+.p10{ padding: 10px!important; }
+.p10-t{ padding-top: 10px!important; }
+.p10-r{ padding-right: 10px!important; }
+.p10-b{ padding-bottom: 10px!important; }
+.p10-l{ padding-left: 10px!important; }
+
+.p15{ padding: 15px!important; }
+.p15-t{ padding-top: 15px!important; }
+.p15-r{ padding-right: 15px!important; }
+.p15-b{ padding-bottom: 15px!important; }
+.p15-l{ padding-left: 15px!important; }
+
+.p20{ padding: 20px!important; }
+.p20-t{ padding-top: 20px!important; }
+.p20-r{ padding-right: 20px!important; }
+.p20-b{ padding-bottom: 20px!important; }
+.p20-l{ padding-left: 20px!important; }
+
+.p25{ padding: 25px!important; }
+.p25-t{ padding-top: 25px!important; }
+.p25-r{ padding-right: 25px!important; }
+.p25-b{ padding-bottom: 25px!important; }
+.p25-l{ padding-left: 25px!important; }
+
+.p30{ padding: 30px!important; }
+.p30-t{ padding-top: 30px!important; }
+.p30-r{ padding-right: 30px!important; }
+.p30-b{ padding-bottom: 30px!important; }
+.p30-l{ padding-left: 30px!important; }
+
+.p40{ padding: 40px!important; }
+.p40-t{ padding-top: 40px!important; }
+.p40-r{ padding-right: 40px!important; }
+.p40-b{ padding-bottom: 40px!important; }
+.p40-l{ padding-left: 40px!important; }
+
+.p50{ padding: 50px!important; }
+.p50-t{ padding-top: 50px!important; }
+.p50-r{ padding-right: 50px!important; }
+.p50-b{ padding-bottom: 50px!important; }
+.p50-l{ padding-left: 50px!important; }
+
+.p60{ padding: 60px!important; }
+.p60-t{ padding-top: 60px!important; }
+.p60-r{ padding-right: 60px!important; }
+.p60-b{ padding-bottom: 60px!important; }
+.p60-l{ padding-left: 60px!important; }
+
+.p70{ padding: 70px!important; }
+.p70-t{ padding-top: 70px!important; }
+.p70-r{ padding-right: 70px!important; }
+.p70-b{ padding-bottom: 70px!important; }
+.p70-l{ padding-left: 70px!important; }
+
+.p80{ padding: 80px!important; }
+.p80-t{ padding-top: 80px!important; }
+.p80-r{ padding-right: 80px!important; }
+.p80-b{ padding-bottom: 80px!important; }
+.p80-l{ padding-left: 80px!important; }
+
+.p90{ padding: 90px!important; }
+.p90-t{ padding-top: 90px!important; }
+.p90-r{ padding-right: 90px!important; }
+.p90-b{ padding-bottom: 90px!important; }
+.p90-l{ padding-left: 90px!important; }
+
+.p100{ padding: 100px!important; }
+.p100-t{ padding-top: 100px!important; }
+.p100-r{ padding-right: 100px!important; }
+.p100-b{ padding-bottom: 100px!important; }
+.p100-l{ padding-left: 100px!important; }
+
+
+/*------------------------------------------------------------
+6、font-size・・・フォントサイズの設定
+-------------------------------------------------------------*/
+
+.b{ font-weight: bold!important; }/*太字*/
+.normal{ font-weight: normal!important; }/*太字を解除*/
+
+.big{ font-size: 1.2em!important; }
+.big2{ font-size: 1.5em!important; }
+.big3{ font-size: 1.8em!important; }
+.small{ font-size: 0.8em!important; }
+
+.f08em{ font-size: 0.8em; }
+.f09em{ font-size: 0.9em; }
+.f10em{ font-size: 1.0em; }
+.f11em{ font-size: 1.1em; }
+.f12em{ font-size: 1.2em; }
+.f13em{ font-size: 1.3em; }
+.f14em{ font-size: 1.4em; }
+.f15em{ font-size: 1.5em; }
+.f16em{ font-size: 1.6em; }
+.f17em{ font-size: 1.7em; }
+.f18em{ font-size: 1.8em; }
+.f19em{ font-size: 1.9em; }
+.f20em{ font-size: 2.0em; }
+.f21em{ font-size: 2.1em; }
+.f22em{ font-size: 2.2em; }
+.f23em{ font-size: 2.3em; }
+.f24em{ font-size: 2.4em; }
+
+.f8pt{ font-size: 8.5pt!important; }
+.f9pt{ font-size: 9.0pt!important; }
+.f10pt{ font-size: 10pt!important; }
+.f11pt{ font-size: 11pt!important; }
+.f12pt{ font-size: 12pt!important; }
+.f13pt{ font-size: 13pt!important; }
+.f14pt{ font-size: 14pt!important; }
+.f15pt{ font-size: 15pt!important; }
+.f16pt{ font-size: 16pt!important; }
+.f17pt{ font-size: 17pt!important; }
+.f18pt{ font-size: 18pt!important; }
+.f19pt{ font-size: 19pt!important; }
+.f20pt{ font-size: 20pt!important; }
+.f21pt{ font-size: 21pt!important; }
+.f22pt{ font-size: 22pt!important; }
+.f23pt{ font-size: 23pt!important; }
+.f24pt{ font-size: 24pt!important; }
+
+
+/*------------------------------------------------------------
+7、color・・・フォントカラーの設定
+-------------------------------------------------------------*/
+
+.red{ color: #ff0000!important; }/*赤*/
+.blue{ color: #0000dd!important; }/*青*/
+.green{ color: #008000!important; }/*緑*/
+.yellow{ color: #ffff00!important; }/*黄*/
+.navy{ color: #1F26A9!important; }/*紺*/
+.orange{ color: #ff6600!important; }/*橙*/
+.pink{ color: #cc6699!important; }/*ピンク*/
+.purple{ color: #660099!important; }/*紫*/
+.olive{ color: #808000!important; }/*黄土色*/
+.lime{ color: #00ff00!important; }/*黄緑*/
+.aqua{ color: #167FA6!important; }/*水色*/
+.black{ color: #000!important; }/*黒*/
+.gray{ color: #ccc!important; }/*灰*/
+.white{ color: #fff!important; }/*白*/
+
+
+/*------------------------------------------------------------
+8、line-height・・・行間の設定
+-------------------------------------------------------------*/
+
+.lh10{ line-height: 1.0!important; }
+.lh11{ line-height: 1.1!important; }
+.lh12{ line-height: 1.2!important; }
+.lh13{ line-height: 1.3!important; }
+.lh14{ line-height: 1.4!important; }
+.lh15{ line-height: 1.5!important; }
+.lh20{ line-height: 2.0!important; }
+
+
+/*------------------------------------------------------------
+9、width・・・テーブル・セルの横幅
+-------------------------------------------------------------*/
+
+#main table .w05{ width: 5%; }
+#main table .w10{ width: 10%; }
+#main table .w15{ width: 15%; }
+#main table .w20{ width: 20%; }
+#main table .w25{ width: 25%; }
+#main table .w30{ width: 30%; }
+#main table .w35{ width: 35%; }
+#main table .w40{ width: 40%; }
+#main table .w45{ width: 45%; }
+#main table .w50{ width: 50%; }
+#main table .w55{ width: 55%; }
+#main table .w60{ width: 60%; }
+#main table .w65{ width: 65%; }
+#main table .w70{ width: 70%; }
+#main table .w75{ width: 75%; }
+#main table .w80{ width: 80%; }
+#main table .w85{ width: 85%; }
+#main table .w90{ width: 90%; }
+#main table .w95{ width: 95%; }
+
+
+/*------------------------------------------------------------
+10、下線や取消線の設定
+-------------------------------------------------------------*/
+
+.underline{ text-decoration: underline!important; }
+.del{ text-decoration: line-through ; }
+.noborder{ border: 0!important; }/*枠線を無くす*/
+
+
+/*------------------------------------------------------------
+11、zindex・・・重なりの優先度
+-------------------------------------------------------------*/
+
+.z1{ z-index: 1!important; }
+.z2{ z-index: 2!important; }
+.z3{ z-index: 3!important; }
+.z4{ z-index: 4!important; }
+.z5{ z-index: 5!important; }
+
+
+/*------------------------------------------------------------
+12、ul.none・・・リスト先頭のアイコンを無くす
+-------------------------------------------------------------*/
+
+ul.none li{ list-style-type: none; }
+
+
+/*------------------------------------------------------------
+13、box・・・蛍光ペンのようなボックスの設定
+-------------------------------------------------------------*/
+
+.box-yellow{ padding:2px;background-color: #ff9!important; }/*黄色*/
+.box-aqua{ padding:2px;background-color: #9ff!important; }/*水色*/
+.box-gray{ padding:2px;background-color: #eee!important; }/*灰色*/
+.box-red{ padding:2px;background-color: #fcc!important; }/*赤色*/
+
+
+/*------------------------------------------------------------
+14、round・・・ボックスを角丸にする（IE8以前には適用されません）
+-------------------------------------------------------------*/
+
+.round{
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+}
+
+
+/*------------------------------------------------------------
+14、input:focus・・・入力フォームをハイライトする
+-------------------------------------------------------------*/
+
+input:focus,
+textarea:focus,
+input.focus,
+textarea.focus{ background-color: #ffffe4!important; }
+
+
+/*------------------------------------------------------------
+15、left、right・・・画像を簡単に回り込ませる設定
+-------------------------------------------------------------*/
+
+/*左に画像、右に文章*/
+.left{
+	float: left;
+	margin: 0 30px 20px 0!important;
+}
+
+
+/*右に画像、左に画像*/
+.right{
+	float: right;
+	margin: 0 0 20px 30px!important;
+}
+
+
+/*640pxでは回り込み解除*/
+@media
+only screen and (max-width : 640px){
+.left,
+.right{
+	float: none;
+	margin-right: 0!important;
+	margin-left: 0!important;
+}
+}
+
+
+/*------------------------------------------------------------
+16、文字列の前にアイコン
+-------------------------------------------------------------*/
+
+.caution1{
+	padding: 10px 0 10px 60px!important;
+	background: url(./images/icon/icon-check01.png) left top no-repeat;
+}
+
+.caution2{
+	padding: 10px 0 10px 60px!important;
+	background: url(./images/icon/icon-check02.png) left top no-repeat;
+}
+
+.caution3{
+	padding: 10px 0 10px 60px!important;
+	background: url(./images/icon/icon-point01.png) left top no-repeat;
+}
+
+.caution4{
+	padding: 10px 0 10px 60px!important;
+	background: url(./images/icon/icon-point02.png) left top no-repeat;
+}
+
+.caution5{
+	padding: 7px 0 7px 45px!important;
+	background: url(./images/icon/icon-check03.png) left top no-repeat;
+}
+
+.caution6{
+	padding: 7px 0 7px 45px!important;
+	background: url(./images/icon/icon-point03.png) left top no-repeat;
+}
+
+.caution7{
+	padding: 10px 0 10px 60px!important;
+	background: url(./images/icon/icon-check07.png) left top no-repeat;
+}
+
+.caution8{
+	padding: 10px 0 10px 60px!important;
+	background: url(./images/icon/icon-check08.png) left top no-repeat;
+}
+
+/*初心者マーク*/
+.wakaba{
+	padding: 7px 0 7px 36px!important;
+	background: url(./images/icon/icon-wakaba.png) left top no-repeat;
+}
+
+/*メールアイコン*/
+.mail{
+	padding: 0 0 0 36px!important;
+	background: url(./images/icon/icon-mail.png) left top no-repeat;
+}
+
+/*PDFアイコン*/
+.pdf{
+	padding: 7px 0 7px 36px!important;
+	background: url(./images/icon/icon-pdf.png) left top no-repeat;
+}
+
+/*ZIPアイコン*/
+.zip{
+	padding: 7px 0 7px 36px!important;
+	background: url(./images/icon/icon-zip.png) left top no-repeat;
+}
+
+/*RSSアイコン*/
+.rss{
+	padding: 5px 0 5px 36px!important;
+	background: url(./images/icon/icon-rss02.png) left top no-repeat;
+}
+
+/*小さいRSSアイコン*/
+.rss-mini{
+	padding-left: 16px!important;
+	background: url(./images/icon/icon-rss-orange.png) left 5px no-repeat;
+}
+
+/*後ろにメールアイコン*/
+.mail-back{
+	padding: 0 34px 0 0!important;
+	background: url(./images/icon/icon-mail.png) right top no-repeat;
+}
+
+/*後ろにPDFアイコン*/
+.pdf-back{
+	padding: 10px 34px 10px 0!important;
+	background: url(./images/icon/icon-pdf.png) right top no-repeat;
+}
+
+/*後ろにZIPアイコン*/
+.zip-back{
+	padding: 10px 34px 10px 0!important;
+	background: url(./images/icon/icon-zip.png) right top no-repeat;
+}
+
+/*後ろにRSSアイコン*/
+.rss-back{
+	padding: 5px 26px 5px 0!important;
+	background: url(./images/icon/icon-rss02.png) right top no-repeat;
+}
+
+
+/*------------------------------------------------------------
+17、ノートのような線を引く
+-------------------------------------------------------------*/
+
+.noteline{
+	display: inline!important;
+	padding-bottom: 0.3em!important;
+	border-bottom: 1px dashed #7070ba!important;
+	line-height: 2.1em!important;
+}
+
+
+/*------------------------------------------------------------
+18、テキストボックスのIME制御（IE＆Firefox）
+-------------------------------------------------------------*/
+
+.ime-active{ ime-mode: active; }
+.ime-inactive{ ime-mode: inactive; }
+.ime-disabled{ ime-mode: disabled; }
+
+/*------------------------------------------------------------
+19、check
+-------------------------------------------------------------*/
+
+.check {
+font-size: 10px;
+text-decoration: underline;
+color: rgb(255, 5, 5);
+background-color: rgb(255, 203, 203);
+font-weight: bold;
+padding: 0px 1px;
+}
+
+/*------------------------------------------------------------
+20、参考
+-------------------------------------------------------------*/
+
+.sankouicon {
+color: #fff;
+background-color: #fc7a22;
+padding: 1px 5px 0;
+border-radius: 2px;
+font-size: 12px;
+}
+
+/*------------------------------------------------------------
+21、会話
+-------------------------------------------------------------*/
+
+/* 吹き出し会話 */
+.talk {
+  margin-bottom: 25px;
+}
+
+.talk figure img {
+  width: 120%;
+  height: 120%;
+  border: 1px solid #aaa;
+  border-radius: 50%;
+  margin: 0 0 -20px 0;
+}
+
+.talk-description {
+  padding:8px 5px 0px 14px;
+  font-size: 10px;
+  text-align: center;
+}
+
+p.talk-text {
+  margin: 0 0 20px;
+}
+
+p.talk-text:last-child {
+  margin-bottom: 0;
+}
+
+/*---------- fb ----------*/
+
+.talk-img-left {
+  margin: 0;
+  float: left;
+  width: 70px;
+  height: 70px;
+}
+
+.talk-img-right {
+  margin: 0px 20px 0px 0px;
+  float: right;
+  width: 70px;
+  height: 70px;
+}
+
+.talk-text-left-fb {
+  position: relative;
+  margin: 0px 10px 0px 100px;
+  padding: 10px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  background: linear-gradient(#fff, #f5f5f5);
+}
+
+.talk-text-left-fb:before {
+  position: absolute;
+  content: '';
+  border: 10px solid transparent;
+  border-right: 10px solid #aaa;
+  top: 14px;
+  left: -20px;
+}
+
+.talk-text-left-fb:after {
+  position: absolute;
+  content: '';
+  border: 10px solid transparent;
+  border-right: 10px solid #f8f8f8;
+  top: 14px;
+  left: -19px;
+}
+
+.talk-text-right-fb {
+  position: relative;
+  margin: 0px 100px 0px 10px;
+  padding: 10px;
+  border: 1px solid #95b1d8;
+  border-radius: 5px;
+  background: linear-gradient(#f2f6ff, #cbe1ff);
+}
+
+.talk-text-right-fb:before {
+  position: absolute;
+  content: '';
+  border: 10px solid transparent;
+  border-left: 10px solid #95b1d8;
+  top: 14px;
+  right: -20px;
+}
+
+.talk-text-right-fb:after {
+  position: absolute;
+  content: '';
+  border: 10px solid transparent;
+  border-left: 10px solid #e5eeff;
+  top: 14px;
+  right: -19px;
+}
+
+
+/*------------------------------------------------------------
+22、質問
+-------------------------------------------------------------*/
+
+.q {
+color: #fff;
+background-color: #fc2121;
+padding: 1px 5px 0;
+border-radius: 2px;
+font-size: 12px;
+}
+
+/*------------------------------------------------------------
+23、回答
+-------------------------------------------------------------*/
+
+.a {
+color: #fff;
+background-color: #2521fc;
+padding: 1px 5px 0;
+border-radius: 2px;
+font-size: 12px;
+}

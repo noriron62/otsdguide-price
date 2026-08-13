@@ -1,0 +1,155 @@
+@charset "UTF-8";
+
+/*------------------------------------------------------------
+ブラウザ固有のCSSをリセット
+-------------------------------------------------------------*/
+
+*{ letter-spacing: 0; }
+
+html{ overflow-y: scroll; }
+
+body,div,ol,ul,li,
+h1,h2,h3,h4,h5,h6,pre,form,fieldset,
+input,p,blockquote{
+	margin: 0;
+	padding: 0;
+}
+
+address,caption,cite,code,dfn,var,h1,h2,h3,h4,h5,h6{
+	font-style: normal;
+	font-weight: normal;
+}
+
+h1,h2,h3,h4,h5,h6,small{
+	font-size: 100%;
+	font-weight: normal;
+}
+
+fieldset,img,abbr{ border: 0; }
+
+caption{ text-align: left; }
+
+q{ quotes: none; }
+
+q:before,q:after{
+	content: '';
+	content: none;
+}
+
+a{ text-decoration: none; }
+
+a:hover{position:relative;top:1px;left:1px;}
+a:active{ outline: 0; }
+
+img{
+	border: 0;
+	vertical-align: bottom;
+	-ms-interpolation-mode: bicubic;
+}
+
+b,strong{ font-weight: bold; }
+
+div{ word-wrap: break-word; }
+
+sub,sup{
+	position: relative;
+	line-height: 0;
+	vertical-align: baseline;
+	font-size: 75%;
+}
+sup{ top: -0.5em; }
+sub{ bottom: -0.25em; }
+
+pre,code{
+	font-size: 1em;
+	font-family: sans-serif;
+}
+
+pre{
+	overflow: auto;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
+form{ margin: 0; }
+
+button,input,select,textarea,optgroup,option{
+	margin: 0;
+	font-family: sans-serif;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+
+* html button,
+* html input,
+* html select,
+* html textarea{ vertical-align: middle; } /* IE6 */
+
+*+html button,
+*+html input,
+*+html select,
+*+html textarea{ vertical-align: middle; } /* IE7 */
+
+button,input{ line-height: normal; }
+
+* html button,
+* html input{ overflow: visible; } /* IE6 */
+
+*+html button,
+*+html input{ overflow: visible; } /* IE7 */
+
+textarea{
+	overflow: auto;
+	vertical-align: top;
+}
+
+input[type="text"],textarea{ padding: 2px; }
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"]{ -webkit-appearance: button; }
+
+button::-moz-focus-inner,
+input::-moz-focus-inner{
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+/*--------------------------------------------------------
+レイアウトの初期設定
+-------------------------------------------------------*/
+body{
+	font-family: 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif;
+	font-size: 62.5%;
+	font-style: normal;
+	line-height: 1.5;
+}
+
+table{
+	width: 65%;
+　　　　height: 30%;
+	border-collapse: separate;
+	border-spacing: 0;
+	table-layout: auto;
+	word-break: break-all;
+	word-wrap: break-word;
+}
+
+* html table{ border-collapse: collapse; } /* IE6 */
+*+html table{ border-collapse: collapse; } /* IE7 */
+
+hr{
+	clear: both;
+	height: 1px;
+	margin: 0 0 1.5em;
+	padding: 0;
+	border: 0;
+	border-top: 1px solid #ccc;
+	color: #ccc;
+	font-size: 1.0em;
+	line-height: 1.0em;
+}
+* html hr{ margin: 0 0 1.2em; } /* IE6 */
+*+html hr{ margin: 0 0 1.2em; } /* IE7 */

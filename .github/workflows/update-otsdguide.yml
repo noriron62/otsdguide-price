@@ -1,0 +1,55 @@
+name: Update otsdguide.org price and deploy
+
+on:
+  workflow_dispatch: {}
+  # GitHub自身のスケジュール機能は信頼性の問題があるため使用しない
+  # （oasisu側と同様、cron-job.org等から呼び出す運用を想定）
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build otsdguide.org
+        env:
+          SITE_BASE_URL: ${{ secrets.OTSDGUIDE_SITE_BASE_URL }}
+          RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
+          RAKUTEN_ACCESS_KEY: ${{ secrets.RAKUTEN_ACCESS_KEY }}
+          RAKUTEN_AFFILIATE_ID: ${{ secrets.RAKUTEN_AFFILIATE_ID }}
+          YAHOO_CLIENT_ID: ${{ secrets.YAHOO_CLIENT_ID }}
+          MOSHIMO_A_ID: ${{ secrets.MOSHIMO_A_ID }}
+          MOSHIMO_P_ID: ${{ secrets.MOSHIMO_P_ID }}
+          MOSHIMO_PC_ID: ${{ secrets.MOSHIMO_PC_ID }}
+          MOSHIMO_PL_ID: ${{ secrets.MOSHIMO_PL_ID }}
+          VALUECOMMERCE_SID: ${{ secrets.VALUECOMMERCE_SID }}
+          VALUECOMMERCE_PID: ${{ secrets.VALUECOMMERCE_PID }}
+        run: npm run build
+
+      - name: Commit updated data
+        run: |
+          git config user.name "price-bot"
+          git config user.email "price-bot@users.noreply.github.com"
+          git add docs-otsdguide
+          git diff --cached --quiet && echo "変更なし" || git commit -m "chore: update otsdguide.org prices $(date -u +%Y-%m-%d)"
+          git push
+
+      - name: Deploy via FTP
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_BASE_DIR: ${{ secrets.OTSDGUIDE_FTP_BASE_DIR }}
+        run: npm run deploy

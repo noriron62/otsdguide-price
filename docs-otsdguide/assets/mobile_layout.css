@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+/*--------------------------------------------------------
+モバイル用レイアウト
+------------------------------------------------------*/
+
+@media
+only screen and (max-width : 640px){
+
+#container,
+#top,
+#header,
+#global-nav,
+#breadcrumbs,
+#main-image,
+#main,
+#footer,
+#footer-banner,
+.copyright{
+	width: 100%!important;
+	min-width: 100%!important;
+}
+
+#top-in,
+#header-in,
+#breadcrumbs ol,
+#global-nav-in,
+#main-image-in,
+#main-in,
+#footer-in,
+#footer-banner ul,
+.copyright p{
+	width: 98%!important;
+	margin: 0 1%!important;
+}
+
+#sub-contents,
+#sidebar,
+#main-and-sub,
+#main-contents{
+	float: none!important;
+	width: 100%!important;
+}
+
+#main-image img{ width: 100%!important; }
+
+}

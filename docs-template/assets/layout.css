@@ -1,0 +1,162 @@
+@charset "UTF-8";
+
+/*------------------------------------------------------------
+レイアウト
+-------------------------------------------------------------*/
+
+html,body{ width: 100%; }
+
+
+/*--------------------------------------------------------
+1カラムレイアウト
+--------------------------------------------------------*/
+
+.col1 #container,
+.col1 #top,
+.col1 #header,
+.col1 #global-nav,
+.col1 #main,
+.col1 #main-image,
+.col1 #footer,
+.col1 .copyright{
+	width: 100%;
+	min-width: 800px;
+}
+
+.col1 #top-in,
+.col1 #header-in,
+.col1 #global-nav-in,
+.col1 #main-in,
+.col1 #main-image-in,
+.col1 #footer-in,
+.col1 .copyright p{
+	width: 800px;
+	margin: auto;
+}
+
+.col1 #main-contents{ width: 100%; }
+
+
+/*--------------------------------------------------------
+2カラムレイアウト
+--------------------------------------------------------*/
+
+.col2 #container,
+.col2 #top,
+.col2 #header,
+.col2 #global-nav,
+.col2 #main,
+.col2 #main-image,
+.col2 #footer,
+.col2 .copyright,
+.col2r #container,
+.col2r #top,
+.col2r #header,
+.col2r #global-nav,
+.col2r #main,
+.col2r #main-image,
+.col2r #footer,
+.col2r .copyright{
+	width: 100%;
+	min-width: 950px;
+}
+
+.col2 #top-in,
+.col2 #header-in,
+.col2 #global-nav-in,
+.col2 #main-in,
+.col2 #main-image-in,
+.col2 #footer-in,
+.col2 .copyright p,
+.col2r #top-in,
+.col2r #header-in,
+.col2r #global-nav-in,
+.col2r #main-in,
+.col2r #main-image-in,
+.col2r #footer-in,
+.col2r .copyright p{
+	width: 950px;
+	margin: auto;
+}
+
+.col2 #sidebar,
+.col2r #sidebar{ width: 29.5%; }
+
+.col2 #main-and-sub,
+.col2r #main-and-sub{ width: 66.8%; }
+
+
+/*コンテンツ配置*/
+.col2 #main-and-sub{ float: left; }
+.col2 #sidebar{ float: right; }
+
+.col2r #main-and-sub{ float: right; }
+.col2r #sidebar{ float: left; }
+
+
+/*--------------------------------------------------------
+3カラムレイアウト
+--------------------------------------------------------*/
+
+.col3 #container,
+.col3 #top,
+.col3 #header,
+.col3 #global-nav,
+.col3 #main,
+.col3 #main-image,
+.col3 #footer,
+.col3 .copyright,
+.col3r #container,
+.col3r #top,
+.col3r #header,
+.col3r #global-nav,
+.col3r #main,
+.col3r #main-image,
+.col3r #footer,
+.col3r .copyright{
+	width: 100%;
+	min-width: 950px;
+}
+
+.col3 #top-in,
+.col3 #header-in,
+.col3 #global-nav-in,
+.col3 #main-in,
+.col3 #main-image-in,
+.col3 #footer-in,
+.col3 .copyright p,
+.col3r #top-in,
+.col3r #header-in,
+.col3r #global-nav-in,
+.col3r #main-in,
+.col3r #main-image-in,
+.col3r #footer-in,
+.col3r .copyright p{
+	width: 950px;
+	margin: auto;
+}
+
+.col3 #sidebar,
+.col3r #sidebar{ width: 20%; }
+
+.col3 #main-and-sub,
+.col3r #main-and-sub{ width: 78.5%; }
+
+.col3 #main-contents,
+.col3r #main-contents{ width: 72.5%; }
+
+.col3 #sub-contents,
+.col3r #sub-contents{ width: 25.45%; }
+
+
+/*コンテンツ配置*/
+.col3 #main-and-sub{ float: left; }
+.col3 #main-contents{ float: right; }
+.col3 #sub-contents{ float: left; }
+.col3 #sidebar{ float: right; }
+
+.col3r #main-and-sub{ float: left; }
+.col3r #main-contents{ float: left; }
+.col3r #sub-contents{ float: right; }
+.col3r #sidebar{ float: right; }
+

@@ -46,7 +46,14 @@ export function renderRxFreeRankTable({ quantities, shopResults, history }) {
         const shipping = shop.shippingFor(qty);
         const total = q.productPrice + shipping;
         const perBox = Math.round(total / qty);
-        rows.push({ shopName: shop.name, total, perBox, url: q.affiliateUrl });
+        rows.push({
+          shopName: shop.name,
+          total,
+          perBox,
+          url: q.affiliateUrl,
+          productPrice: q.productPrice,
+          shipping,
+        });
       }
       rows.sort((a, b) => a.total - b.total);
 
@@ -64,11 +71,15 @@ ${RANK_TABLE_COLGROUP}
         .map((r, i) => {
           const rank = i + 1;
           const rankClass = rank === 1 ? ' class="rank1"' : "";
+          const breakdown =
+            r.shipping > 0
+              ? `<span class="price-breakdown">(商品¥${yen(r.productPrice)}+送料¥${yen(r.shipping)})</span>`
+              : "";
           return `      <tr>
         <td${rankClass}>${rank}位</td>
         <td class="shopname"><a href="${escapeHtml(r.url)}" target="_blank" rel="nofollow noopener sponsored">${escapeHtml(r.shopName)}</a></td>
         <td class="price-cell"><a href="${escapeHtml(r.url)}" target="_blank" rel="nofollow noopener sponsored">¥${yen(r.perBox)}</a></td>
-        <td class="price-cell"><a href="${escapeHtml(r.url)}" target="_blank" rel="nofollow noopener sponsored">¥${yen(r.total)}</a></td>
+        <td class="price-cell"><a href="${escapeHtml(r.url)}" target="_blank" rel="nofollow noopener sponsored">¥${yen(r.total)}</a>${breakdown}</td>
       </tr>`;
         })
         .join("\n");
@@ -86,12 +97,13 @@ ${rowsHtml}
 
   return `  <div class="price-box">
     <div class="price-box-head">処方箋不要 ランキング（レンズラボ／レンズモード）</div>
-    <div class="price-box-sub">※処方箋不要で購入できる専門店の価格をまとめています</div>
+    <div class="price-box-sub">※処方箋不要で購入できる専門店の価格をまとめています（表示金額は送料無料、または送料込みの金額です）</div>
     <div class="box-tabs">
       ${tabsHtml}
     </div>
 ${tablesHtml}
 ${history ? renderPriceHistoryChart(history) : ""}
+    <p class="price-note">※表示価格はすべて送料無料（又は送料込み）の金額です。</p>
   </div>`;
 }
 
@@ -147,6 +159,7 @@ ${renderRows(yahooRanking)}
     </div>
 ${tablesHtml}
 ${history ? renderPriceHistoryChart(history) : ""}
+    <p class="price-note">※表示価格はすべて送料無料（又は送料込み）の金額です。</p>
   </div>`;
 }
 

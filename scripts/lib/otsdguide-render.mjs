@@ -10,6 +10,18 @@ const yenFmt = new Intl.NumberFormat("ja-JP");
 const yen = (n) => (typeof n === "number" ? yenFmt.format(n) : "-");
 
 /**
+ * 「順位・ショップ・単価・合計」4列の幅を固定するcolgroup。
+ * colspan="4"の見出し行が混在するテーブルで、行ごとに列幅の自動計算が
+ * ズレて縦の罫線がバラバラになる問題を防ぐために、全テーブル共通で使う。
+ */
+const RANK_TABLE_COLGROUP = `      <colgroup>
+        <col style="width:15%">
+        <col style="width:39%">
+        <col style="width:23%">
+        <col style="width:23%">
+      </colgroup>`;
+
+/**
  * unit.label(例: "90枚×2箱セット" "2箱(標準サイズ・60枚)")から、
  * 「購入したときです！」に自然につながる短い単位表記に正規化する。
  * 例: "90枚×2箱セット" → "90枚×2箱" / "2箱(標準サイズ・60枚)" → "2箱(60枚)"
@@ -24,7 +36,7 @@ function normalizeUnitLabel(label) {
  * テーブルを生成する。quantities順(降順を想定)に、それぞれ独立した
  * <table>として出力する(箱数ごとに見た目を分離するため)。
  */
-export function renderRxFreeRankTable({ quantities, shopResults }) {
+export function renderRxFreeRankTable({ quantities, shopResults, history }) {
   const tablesHtml = quantities
     .map((qty) => {
       const rows = [];
@@ -42,6 +54,7 @@ export function renderRxFreeRankTable({ quantities, shopResults }) {
 
       if (rows.length === 0) {
         return `    <table class="rank-table">
+${RANK_TABLE_COLGROUP}
       <tr><th colspan="4">${qtyLabel}</th></tr>
       <tr><td colspan="4" class="empty-row">現在、該当する価格情報がありません。</td></tr>
     </table>`;
@@ -61,6 +74,7 @@ export function renderRxFreeRankTable({ quantities, shopResults }) {
         .join("\n");
 
       return `    <table class="rank-table">
+${RANK_TABLE_COLGROUP}
       <tr><th colspan="4">${qtyLabel}</th></tr>
       <tr><th>順位</th><th>ショップ</th><th>単価（1箱）</th><th>合計</th></tr>
 ${rowsHtml}
@@ -77,7 +91,7 @@ ${rowsHtml}
       ${tabsHtml}
     </div>
 ${tablesHtml}
-    <div class="graph-placeholder">［ 価格推移グラフ（点＋ラベル表示）を挿入 ］</div>
+${history ? renderPriceHistoryChart(history) : ""}
   </div>`;
 }
 
@@ -89,7 +103,7 @@ ${tablesHtml}
  * 見出しには「楽天市場 TOPn（単位ラベル）」のように箱数を含める。
  * unitResults(unitごとの{unit, rakutenRanking, yahooRanking})をそのまま受け取る。
  */
-export function renderRakutenYahooRankTable({ unitResults }) {
+export function renderRakutenYahooRankTable({ unitResults, history }) {
   const tabsHtml = unitResults
     .map(({ unit }) => `<span>${escapeHtml(normalizeUnitLabel(unit.label))}</span>`)
     .join("");
@@ -115,6 +129,7 @@ export function renderRakutenYahooRankTable({ unitResults }) {
     .map(({ unit, rakutenRanking, yahooRanking }) => {
       const unitLabel = normalizeUnitLabel(unit.label);
       return `    <table class="rank-table">
+${RANK_TABLE_COLGROUP}
       <tr><th colspan="4" class="table-title">楽天市場 TOP${rakutenRanking.length || 3}（${escapeHtml(unitLabel)}）</th></tr>
       <tr><th>順位</th><th>ショップ</th><th>単価（1箱）</th><th>合計</th></tr>
 ${renderRows(rakutenRanking)}
@@ -131,7 +146,7 @@ ${renderRows(yahooRanking)}
       ${tabsHtml}
     </div>
 ${tablesHtml}
-    <div class="graph-placeholder">［ 価格推移グラフ（点＋ラベル表示）を挿入 ］</div>
+${history ? renderPriceHistoryChart(history) : ""}
   </div>`;
 }
 
@@ -222,4 +237,122 @@ export function pickRakutenYahooOverallBest(overallBest, overallBestUnit) {
     url: overallBest.url,
     unitLabel: overallBestUnit?.label ? normalizeUnitLabel(overallBestUnit.label) : null,
   };
+}
+
+/**
+ * 価格推移グラフ用に、履歴データを「直近7日は日次のまま・それより古い分は
+ * 7日ごとの週平均にまとめる」形に変換する。データが増えてもグラフの点数が
+ * 際限なく増えず、見た目がゴチャつかないようにするための処理。
+ * historyは日付昇順(古い→新しい)を前提とする(updatePriceHistoryの戻り値通り)。
+ * 戻り値は [{ date, price, label, isWeekly }] の配列(古い→新しい順)。
+ * dateは日次点なら"YYYY-MM-DD"、週集約点ならグループ最終日の"YYYY-MM-DD"。
+ * labelはX軸に出す表示用文字列。
+ */
+export function groupHistoryForChart(history) {
+  if (!history || history.length === 0) return [];
+
+  const RECENT_DAYS = 7;
+  const recentCount = Math.min(RECENT_DAYS, history.length);
+  const olderPart = history.slice(0, history.length - recentCount);
+  const recentPart = history.slice(history.length - recentCount);
+
+  const weeklyPoints = [];
+  for (let i = 0; i < olderPart.length; i += RECENT_DAYS) {
+    const chunk = olderPart.slice(i, i + RECENT_DAYS);
+    const avg = Math.round(chunk.reduce((sum, h) => sum + h.price, 0) / chunk.length);
+    const firstDate = chunk[0].date;
+    const lastDate = chunk[chunk.length - 1].date;
+    weeklyPoints.push({
+      date: lastDate,
+      price: avg,
+      label: formatWeekRangeLabel(firstDate, lastDate),
+      isWeekly: true,
+    });
+  }
+
+  const dailyPoints = recentPart.map((h) => ({
+    date: h.date,
+    price: h.price,
+    label: formatMonthDayLabel(h.date),
+    isWeekly: false,
+  }));
+
+  return [...weeklyPoints, ...dailyPoints];
+}
+
+function formatMonthDayLabel(dateStr) {
+  const d = new Date(dateStr);
+  return `${d.getMonth() + 1}/${d.getDate()}`;
+}
+
+function formatWeekRangeLabel(firstDateStr, lastDateStr) {
+  const a = new Date(firstDateStr);
+  const b = new Date(lastDateStr);
+  return `${a.getMonth() + 1}/${a.getDate()}〜${b.getMonth() + 1}/${b.getDate()}`;
+}
+
+/**
+ * groupHistoryForChartの結果を、シンプルな点+ラベル表示のSVG折れ線グラフに
+ * する。週集約点はオレンジ、日次点は赤の点で区別する。
+ */
+export function renderPriceHistoryChart(history) {
+  const points = groupHistoryForChart(history);
+  if (points.length < 2) {
+    return "";
+  }
+
+  const W = 640;
+  const H = 220;
+  const PAD_L = 30;
+  const PAD_R = 30;
+  const PAD_T = 34;
+  const PAD_B = 34;
+  const chartW = W - PAD_L - PAD_R;
+  const chartH = H - PAD_T - PAD_B;
+
+  const prices = points.map((p) => p.price);
+  const rawMin = Math.min(...prices);
+  const rawMax = Math.max(...prices);
+  const rawRange = rawMax - rawMin;
+  const padding = rawRange > 0 ? rawRange * 0.25 : Math.max(rawMax * 0.03, 5);
+  const vMin = rawMin - padding;
+  const vMax = rawMax + padding;
+  const vRange = vMax - vMin || 1;
+
+  const xAt = (i) => PAD_L + (chartW * i) / Math.max(points.length - 1, 1);
+  const yAt = (v) => PAD_T + chartH * (1 - (v - vMin) / vRange);
+
+  const xy = points.map((p, i) => [xAt(i), yAt(p.price)]);
+  const pathD = "M " + xy.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(" L ");
+
+  const dots = points
+    .map((p, i) => {
+      const [x, y] = xy[i];
+      const r = p.isWeekly ? 5 : 6;
+      const color = p.isWeekly ? "#e0a030" : "#d32f2f";
+      const prevY = i > 0 ? xy[i - 1][1] : y;
+      const nextY = i < xy.length - 1 ? xy[i + 1][1] : y;
+      const isPeak = y <= prevY && y <= nextY;
+      const labelY = isPeak ? y + r + 16 : y - r - 8;
+      const priceLabel = `<text x="${x.toFixed(1)}" y="${labelY.toFixed(1)}" font-size="12" font-weight="700" fill="#333" text-anchor="middle">¥${yen(p.price)}</text>`;
+      return `${priceLabel}\n  <circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" fill="${color}" stroke="#fff" stroke-width="1.5" />`;
+    })
+    .join("\n");
+
+  const xLabels = points
+    .map((p, i) => {
+      const [x] = xy[i];
+      return `<text x="${x.toFixed(1)}" y="${H - 8}" font-size="10" fill="#888" text-anchor="middle">${escapeHtml(p.label)}</text>`;
+    })
+    .join("\n");
+
+  return `  <div class="chart-wrap">
+    <svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+      <line x1="${PAD_L}" y1="${PAD_T + chartH}" x2="${W - PAD_R}" y2="${PAD_T + chartH}" stroke="#eee" stroke-width="1" />
+      <path d="${pathD}" fill="none" stroke="#f0a0a0" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+${dots}
+${xLabels}
+    </svg>
+    <p class="chart-note">※オレンジの点は7日間の平均値(まとめ表示)、赤い点は直近7日間の日次価格です。</p>
+  </div>`;
 }

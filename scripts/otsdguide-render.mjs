@@ -83,8 +83,9 @@ ${tablesHtml}
 
 /**
  * 楽天市場・Yahoo!ショッピングの、比較単位(箱数)ごとのランキングテーブルを
- * 生成する。楽天・Yahoo!はそれぞれ別々に順位付けし(それぞれ独立したTOPn)、
- * 箱数ごとに1つの<table>にまとめる(楽天セクション→Yahooセクションの順)。
+ * 生成する。楽天・Yahoo!はそれぞれ独立した順位付け(それぞれ独立したTOPn)で、
+ * かつ完全に別々の<table>として出力する(間を空けて見やすくするため)。
+ * 見出しには「楽天市場 TOPn（単位ラベル）」のように箱数を含める。
  * unitResults(unitごとの{unit, rakutenRanking, yahooRanking})をそのまま受け取る。
  */
 export function renderRakutenYahooRankTable({ unitResults }) {
@@ -92,36 +93,40 @@ export function renderRakutenYahooRankTable({ unitResults }) {
     .map(({ unit }) => `<span>${escapeHtml(normalizeUnitLabel(unit.label))}</span>`)
     .join("");
 
-  const tablesHtml = unitResults
-    .map(({ unit, rakutenRanking, yahooRanking }) => {
-      const unitLabel = normalizeUnitLabel(unit.label);
-
-      const renderRows = (ranking) => {
-        if (!ranking || ranking.length === 0) {
-          return `      <tr><td colspan="4" class="empty-row">現在、該当する価格情報がありません。</td></tr>`;
-        }
-        return ranking
-          .map((item) => {
-            const rankClass = item.rank === 1 ? ' class="rank1"' : "";
-            return `      <tr>
+  const renderRows = (ranking) => {
+    if (!ranking || ranking.length === 0) {
+      return `      <tr><td colspan="4" class="empty-row">現在、該当する価格情報がありません。</td></tr>`;
+    }
+    return ranking
+      .map((item) => {
+        const rankClass = item.rank === 1 ? ' class="rank1"' : "";
+        return `      <tr>
         <td${rankClass}>${item.rank}位</td>
         <td class="shopname"><a href="${escapeHtml(item.url)}" target="_blank" rel="nofollow noopener sponsored">${escapeHtml(item.shop)}</a></td>
         <td class="price-cell"><a href="${escapeHtml(item.url)}" target="_blank" rel="nofollow noopener sponsored">¥${yen(item.boxUnitPrice)}</a></td>
         <td class="price-cell"><a href="${escapeHtml(item.url)}" target="_blank" rel="nofollow noopener sponsored">¥${yen(item.price)}</a></td>
       </tr>`;
-          })
-          .join("\n");
-      };
+      })
+      .join("\n");
+  };
 
-      return `    <table class="rank-table">
-      <tr><th colspan="4">${escapeHtml(unitLabel)}</th></tr>
-      <tr class="section-row"><td colspan="4">楽天市場 TOP${rakutenRanking.length || 3}</td></tr>
+  const tablesHtml = unitResults
+    .flatMap(({ unit, rakutenRanking, yahooRanking }) => {
+      const unitLabel = normalizeUnitLabel(unit.label);
+
+      const rakutenTable = `    <table class="rank-table">
+      <tr><th colspan="4" class="table-title">楽天市場 TOP${rakutenRanking.length || 3}（${escapeHtml(unitLabel)}）</th></tr>
       <tr><th>順位</th><th>ショップ</th><th>単価（1箱）</th><th>合計</th></tr>
 ${renderRows(rakutenRanking)}
-      <tr class="section-row"><td colspan="4">Yahoo!ショッピング TOP${yahooRanking.length || 3}</td></tr>
+    </table>`;
+
+      const yahooTable = `    <table class="rank-table">
+      <tr><th colspan="4" class="table-title">Yahoo!ショッピング TOP${yahooRanking.length || 3}（${escapeHtml(unitLabel)}）</th></tr>
       <tr><th>順位</th><th>ショップ</th><th>単価（1箱）</th><th>合計</th></tr>
 ${renderRows(yahooRanking)}
     </table>`;
+
+      return [rakutenTable, yahooTable];
     })
     .join("\n");
 

@@ -83,8 +83,9 @@ ${tablesHtml}
 
 /**
  * 楽天市場・Yahoo!ショッピングの、比較単位(箱数)ごとのランキングテーブルを
- * 生成する。楽天・Yahoo!はそれぞれ独立した順位付け(それぞれ独立したTOPn)で、
- * かつ完全に別々の<table>として出力する(間を空けて見やすくするため)。
+ * 生成する。楽天・Yahoo!はそれぞれ独立した順位付け(それぞれ独立したTOPn)だが、
+ * 箱数ごとに1つの<table>にまとめる(楽天セクション見出し→楽天ランキング→
+ * Yahooセクション見出し→Yahooランキングの順で、間隔をあけずに連続表示)。
  * 見出しには「楽天市場 TOPn（単位ラベル）」のように箱数を含める。
  * unitResults(unitごとの{unit, rakutenRanking, yahooRanking})をそのまま受け取る。
  */
@@ -111,22 +112,16 @@ export function renderRakutenYahooRankTable({ unitResults }) {
   };
 
   const tablesHtml = unitResults
-    .flatMap(({ unit, rakutenRanking, yahooRanking }) => {
+    .map(({ unit, rakutenRanking, yahooRanking }) => {
       const unitLabel = normalizeUnitLabel(unit.label);
-
-      const rakutenTable = `    <table class="rank-table">
+      return `    <table class="rank-table">
       <tr><th colspan="4" class="table-title">楽天市場 TOP${rakutenRanking.length || 3}（${escapeHtml(unitLabel)}）</th></tr>
       <tr><th>順位</th><th>ショップ</th><th>単価（1箱）</th><th>合計</th></tr>
 ${renderRows(rakutenRanking)}
-    </table>`;
-
-      const yahooTable = `    <table class="rank-table">
       <tr><th colspan="4" class="table-title">Yahoo!ショッピング TOP${yahooRanking.length || 3}（${escapeHtml(unitLabel)}）</th></tr>
       <tr><th>順位</th><th>ショップ</th><th>単価（1箱）</th><th>合計</th></tr>
 ${renderRows(yahooRanking)}
     </table>`;
-
-      return [rakutenTable, yahooTable];
     })
     .join("\n");
 

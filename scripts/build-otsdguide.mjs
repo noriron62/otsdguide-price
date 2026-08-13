@@ -112,9 +112,12 @@ async function main() {
     rxRequiredBest: standardRakutenYahooBest,
   });
   const standardRxFreeTable = standardData.rxFreeShopResults
-    ? renderRxFreeRankTable(standardData.rxFreeShopResults)
+    ? renderRxFreeRankTable({ ...standardData.rxFreeShopResults, history: standardData.rxFreeHistory })
     : "";
-  const standardRakutenYahooTable = renderRakutenYahooRankTable({ unitResults: standardData.unitResults });
+  const standardRakutenYahooTable = renderRakutenYahooRankTable({
+    unitResults: standardData.unitResults,
+    history: standardData.history,
+  });
 
   const multiTalkBubble = renderTalkBubble({
     avatarSrc: "assets/uploads/man.png",
@@ -128,8 +131,13 @@ async function main() {
     rxFreeBest: multiRxFreeBest,
     rxRequiredBest: multiRakutenYahooBest,
   });
-  const multiRxFreeTable = multiData.rxFreeShopResults ? renderRxFreeRankTable(multiData.rxFreeShopResults) : "";
-  const multiRakutenYahooTable = renderRakutenYahooRankTable({ unitResults: multiData.unitResults });
+  const multiRxFreeTable = multiData.rxFreeShopResults
+    ? renderRxFreeRankTable({ ...multiData.rxFreeShopResults, history: multiData.rxFreeHistory })
+    : "";
+  const multiRakutenYahooTable = renderRakutenYahooRankTable({
+    unitResults: multiData.unitResults,
+    history: multiData.history,
+  });
 
   // ---- テンプレートへの差し込み ----
   const template = await readFile(TEMPLATE_PATH, "utf-8");

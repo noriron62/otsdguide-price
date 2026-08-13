@@ -9,6 +9,17 @@
 
 import { stripShippingPromoText } from "./lib/common.mjs";
 
+/**
+ * 商品名から「単品」を最優先で除外し、対象の箱数表記があるかを判定する
+ * 共通ヘルパー。
+ */
+function isBoxCount(name, targetCount) {
+  if (!name) return false;
+  const n = stripShippingPromoText(name.replace(/\s/g, ""));
+  if (/単品/.test(n)) return false;
+  return new RegExp(`${targetCount}箱`).test(n);
+}
+
 export const products = [
   {
     id: "otsdguide-proclear",
